@@ -34,20 +34,20 @@ namespace CustomProgramCode
 
         public void Initialize()
         {
-            LoadLevel(_currentLevel);
+            LoadLevel(_currentLevel); // Load the first level
         }
 
         public void LoadLevel(int levelNumber)
         {
-            _player.SetSpawnPoint(100, 150);
+            _player.SetSpawnPoint(100, 150); // Set player spawn point
             if (levelNumber > MAX_LEVEL)
             {
-                _gameWon = true;
+                _gameWon = true; // Mark the game as won if the maximum level is exceeded
                 return;
             }
 
-            _level.InitializeLevel(levelNumber);
-            _enemies = _level.GetEnemies();
+            _level.InitializeLevel(levelNumber); // Initialize the level
+            _enemies = _level.GetEnemies(); // Get the list of enemies in the level
             _levelCleared = false; // Reset level cleared state
             _levelClearTimer.Stop();
             _levelClearTimer.Reset();
@@ -78,10 +78,10 @@ namespace CustomProgramCode
         {
             if (!_levelCleared && !_gameWon && !_gameLost)
             {
-                _player.HandleInput(_level.GetWalls(), _enemies);
+                _player.HandleInput(_level.GetWalls(), _enemies); // Handle player input for movement and actions
             }
 
-            // Example of changing levels with key press (can be adjusted as needed)
+            // Example of changing levels with key press (for debugging and presenting)
             if (SplashKit.KeyTyped(KeyCode.Num1Key)) LoadLevel(1);
             if (SplashKit.KeyTyped(KeyCode.Num2Key)) LoadLevel(2);
             if (SplashKit.KeyTyped(KeyCode.Num3Key)) LoadLevel(3);
@@ -94,18 +94,18 @@ namespace CustomProgramCode
                 if (_levelClearTimer.Ticks >= LEVEL_CLEAR_COOLDOWN)
                 {
                     _currentLevel++;
-                    LoadLevel(_currentLevel);
+                    LoadLevel(_currentLevel); // Load the next level after cooldown
                 }
                 return; // Skip the rest of the update if the level is cleared
             }
 
             if (_gameWon || _gameLost) return; // Do not update if the game is won or lost
 
-            _player.Update();
+            _player.Update(); // Update player state
 
             if (_player.IsDead)
             {
-                _gameLost = true;
+                _gameLost = true; // Mark the game as lost if the player is dead
                 return;
             }
 
@@ -113,9 +113,9 @@ namespace CustomProgramCode
             {
                 var enemy = _enemies[i];
 
-                enemy.HandleMovement(_player, _level.GetWalls());
+                enemy.HandleMovement(_player, _level.GetWalls()); // Handle enemy movement
                 enemy.HandleAttack(_player); // Enemy attacks the player if in range
-                enemy.Update(_player);
+                enemy.Update(_player); // Update enemy state
 
                 // Check health after updating
                 if (enemy.Health <= 0)
@@ -127,43 +127,43 @@ namespace CustomProgramCode
             // Check if all enemies are cleared
             if (_enemies.Count == 0 && !_levelCleared && !_gameWon)
             {
-                _levelCleared = true;
-                _levelClearTimer.Start();
+                _levelCleared = true; // Mark the level as cleared
+                _levelClearTimer.Start(); // Start the timer for level transition
             }
         }
 
         public void Draw()
         {
-            _window.Clear(Color.White);
-            DrawBackground();
-            _player.Draw();
+            _window.Clear(Color.White); // Clear the window with white color
+            DrawBackground(); // Draw the background grid
+            _player.Draw(); // Draw the player
 
-            _level.DrawWalls();
-            _level.DrawEnemies();
+            _level.DrawWalls(); // Draw the walls
+            _level.DrawEnemies(); // Draw the enemies
 
             if (_levelCleared && !_gameWon && !_gameLost)
             {
-                DrawMessage($"You have cleared Level {_currentLevel}!", Color.Green);
+                DrawMessage($"You have cleared Level {_currentLevel}!", Color.Green); // Display level cleared message
             }
             else if (_gameWon)
             {
-                DrawMessage("You have won!", Color.Green);
+                DrawMessage("You have won!", Color.Green); // Display game won message
             }
             else if (_gameLost)
             {
-                DrawMessage("You have lost!", Color.Red);
+                DrawMessage("You have lost!", Color.Red); // Display game lost message
             }
 
-            _window.Refresh();
+            _window.Refresh(); // Refresh the window display
         }
 
         private void DrawMessage(string message, Color color)
         {
             int fontSize = 24;
-            Font font = SplashKit.LoadFont("Arial", "arial.ttf");
-            float x = (_window.Width - SplashKit.TextWidth(message, font, fontSize)) / 2;
-            float y = (_window.Height - SplashKit.TextHeight(message, font, fontSize)) / 2;
-            SplashKit.DrawText(message, color, font, fontSize, x, y);
+            Font font = SplashKit.LoadFont("Arial", "arial.ttf"); // Load the font
+            float x = (_window.Width - SplashKit.TextWidth(message, font, fontSize)) / 2; // Calculate x position
+            float y = (_window.Height - SplashKit.TextHeight(message, font, fontSize)) / 2; // Calculate y position
+            SplashKit.DrawText(message, color, font, fontSize, x, y); // Draw the message text
         }
     }
 }

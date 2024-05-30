@@ -14,6 +14,7 @@ namespace CustomProgramCode
         private const double ATTACK_COOLDOWN_TIME = 5000; // Attack speed in milliseconds (5 seconds)
         private SplashKitSDK.Timer _attackCooldownTimer; // Timer for managing attack cooldown
 
+        // Constructor: Initialize goblin with position, animation, and timers
         public Goblin(float x, float y)
             : base("Goblin", "GoblinAnimations", x, y, 50) // Pass initial health to base constructor
         {
@@ -26,6 +27,7 @@ namespace CustomProgramCode
             AttackRange = 80;
         }
 
+        // HandleMovement: Handle goblin movement towards the player and avoid collisions
         public override void HandleMovement(Player player, List<Wall> walls)
         {
             float newX = _sprite.X;
@@ -140,9 +142,10 @@ namespace CustomProgramCode
                 }
             }
 
-            _sprite.MoveTo(newX, newY);
+            _sprite.MoveTo(newX, newY); // Move the sprite to the new position
         }
 
+        // HandleAttack: Handle the goblin's attack behavior and animations
         public override void HandleAttack(Player player)
         {
             _isAttacking = true;
@@ -174,6 +177,7 @@ namespace CustomProgramCode
             _attackCooldownTimer.Start(); // Restart the timer for the cooldown period
         }
 
+        // Draw: Draw the goblin, including health bar
         public override void Draw()
         {
             base.Draw();

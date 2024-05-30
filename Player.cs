@@ -16,10 +16,10 @@ namespace CustomProgramCode
         private bool _useAlternateAttack = false; // Flag to do alternate attack animations
         private int _health;
         private List<HealthMessage> _damageMessages;
-        private const double ATTACK_COOLDOWN_TIME = 500; // Attack cooldown time in milliseconds (1 second)
+        private const double ATTACK_COOLDOWN_TIME = 500; // Attack cooldown time in milliseconds (0.5 second)
         private SplashKitSDK.Timer _attackCooldownTimer; // Timer for managing attack cooldown
-        private const int AttackRange = 100;  // Attack range in pixels
-        private bool _isDead = false; // Variable to track if the player is dead
+        private const int AttackRange = 100;  // Default Attack range
+        private bool _isDead = false;
         private int damage = 20;
 
         public Sprite Sprite => _sprite;
@@ -27,6 +27,7 @@ namespace CustomProgramCode
         public float Y => _sprite.Y;
         public bool IsDead => _isDead;
 
+        // Constructor: Initialize player with bitmap, animations, health, and timers
         public Player()
         {
             // Load the player bitmap and set cell details
@@ -52,12 +53,15 @@ namespace CustomProgramCode
 
             _damageMessages = new List<HealthMessage>();
         }
+
+        // SetSpawnPoint: Set the player's spawn position
         public void SetSpawnPoint(float x, float y)
         {
             _sprite.X = x;
             _sprite.Y = y;
         }
-
+        
+        // Update: Update the player's state, including animations and damage messages
         public void Update()
         {
             _sprite.UpdateAnimation();
@@ -92,6 +96,7 @@ namespace CustomProgramCode
             }
         }
 
+        // Draw: Draw the player, health bar, and any damage messages or attack effects
         public void Draw()
         {
             SplashKit.DrawSprite(_sprite);
@@ -111,6 +116,7 @@ namespace CustomProgramCode
             }
         }
 
+        // HandleInput: Handle player input for movement and actions
         public void HandleInput(List<Wall> walls, List<Enemy> enemies)
         {
             float newX = _sprite.X;
@@ -142,6 +148,7 @@ namespace CustomProgramCode
             }
         }
 
+        // HandleAttack: Handle the attack logic and animations
         private void HandleAttack(List<Enemy> enemies)
         {
             AttackEnemy(enemies);
@@ -197,6 +204,7 @@ namespace CustomProgramCode
             _useAlternateAttack = !_useAlternateAttack; // Toggle the alternate attack flag
         }
 
+        // StartAttackAnimation: Start the appropriate attack animation based on direction and type
         private void StartAttackAnimation(string primaryAnimation, string alternateAnimation)
         {
             if (_useAlternateAttack)
@@ -211,6 +219,7 @@ namespace CustomProgramCode
             }
         }
 
+        // HandleMovement: Handle player movement and collisions with walls
         private void HandleMovement(ref float newX, ref float newY, ref bool moved, List<Wall> walls)
         {
             bool movingUp = SplashKit.KeyDown(KeyCode.UpKey);
@@ -303,6 +312,7 @@ namespace CustomProgramCode
             }
         }
 
+        // SetIdleAnimation: Set the idle animation based on the last direction faced
         private void SetIdleAnimation()
         {
             if (_doingAnim)
@@ -319,6 +329,7 @@ namespace CustomProgramCode
             }
         }
 
+        // HasCollidedWith: Check for collisions with another sprite and determine direction of collision
         public string HasCollidedWith(Sprite objects)
         {
             bool up = false;
@@ -360,6 +371,7 @@ namespace CustomProgramCode
             return "No Collision";
         }
 
+        // TakeDamage: Reduce player's health and handle death if health reaches zero
         public void TakeDamage(int amount)
         {
             // Handle player's death
@@ -376,6 +388,7 @@ namespace CustomProgramCode
             }
         }
 
+        // AttackEnemy: Attack enemies within range and deal damage
         public void AttackEnemy(List<Enemy> enemies)
         {
             _isAttacking = true;
@@ -389,6 +402,7 @@ namespace CustomProgramCode
             }
         }
 
+        // IsInRange: Check if an enemy is within attack range
         private bool IsInRange(Enemy enemy)
         {
             double distance = SplashKit.PointPointDistance(new Point2D() { X = X + _sprite.Width / 2, Y = Y + _sprite.Height / 2 }, new Point2D() { X = enemy.X + (enemy.Sprite.Width / 2), Y = enemy.Y + (enemy.Sprite.Height / 2) });

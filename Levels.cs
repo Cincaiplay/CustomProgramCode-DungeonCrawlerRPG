@@ -139,14 +139,14 @@ namespace CustomProgramCode
                         MakeWall(11, i);
                     }
                     MakeWall(0, 142);
-                    
+
                     MakeWall(24, 162);
                     MakeWall(26, 177);
                     MakeWall(2, 157);
                     MakeWall(9, 149);
                     MakeWall(27, 249);
 
-                    
+
                     #endregion
 
                     // Enemies for level 2
@@ -262,7 +262,7 @@ namespace CustomProgramCode
         {
             foreach (var wall in _walls)
             {
-                wall.Draw();
+                wall.Draw(); // Draw each wall
             }
         }
 
@@ -270,19 +270,18 @@ namespace CustomProgramCode
         {
             foreach (var enemy in _enemies)
             {
-                enemy.Draw();
+                enemy.Draw(); // Draw each enemy
             }
         }
 
         public List<Wall> GetWalls()
         {
-            return _walls;
+            return _walls; // Return the list of walls
         }
 
         public List<Enemy> GetEnemies()
         {
-            return _enemies;
+            return _enemies; // Return the list of enemies
         }
-
     }
 }

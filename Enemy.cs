@@ -24,6 +24,7 @@ namespace CustomProgramCode
         public float X => _sprite.X;
         public float Y => _sprite.Y;
 
+        // Constructor: Initialize enemy with bitmap, animation, position, and health
         protected Enemy(string bitmapName, string animationScriptName, float x, float y, int initialHealth)
         {
             // Load the enemy bitmap and set cell details
@@ -43,6 +44,7 @@ namespace CustomProgramCode
             Console.WriteLine("Enemy created with health: " + Health);
         }
 
+        // Update: Update the enemy's state, including animations, attack cooldown, and messages
         public virtual void Update(Player player)
         {
             _sprite.UpdateAnimation();
@@ -77,12 +79,14 @@ namespace CustomProgramCode
             }
         }
 
+        // IsInRange: Check if the player is within attack range
         public bool IsInRange(Player player)
         {
             double distance = SplashKit.PointPointDistance(new Point2D() { X = X + (_sprite.Width / 2), Y = Y + (_sprite.Height / 2) }, new Point2D() { X = player.X + (player.Sprite.Width / 2), Y = player.Y + (player.Sprite.Height / 2) });
             return distance <= AttackRange;
         }
 
+        // Draw the enemy and any health messages or attack effects
         public virtual void Draw()
         {
             SplashKit.DrawSprite(_sprite);
@@ -90,10 +94,13 @@ namespace CustomProgramCode
             RenderAttackEffect();
         }
 
+        // Abstract method to handle enemy movement
         public abstract void HandleMovement(Player player, List<Wall> walls);
 
+        // Abstract method to handle enemy attack behavior
         public abstract void HandleAttack(Player player);
 
+        // Execute an attack on the player if cooldown allows
         public void Attack(Player player)
         {
             if (_attackCooldown == 0)
@@ -105,6 +112,7 @@ namespace CustomProgramCode
             }
         }
 
+        // Reduce enemy health and handle death if health reaches zero
         public void TakeDamage(int damage)
         {
             Health -= damage;
@@ -116,12 +124,14 @@ namespace CustomProgramCode
             }
         }
 
+        // Handle enemy death (e.g., set health to zero, potentially drop items)
         protected virtual void Die()
         {
             Health = 0; // Mark the enemy as dead
             // TryDropItem();
         }
 
+        // Render all health messages on the screen
         public void RenderMessages()
         {
             foreach (var msg in _messages)
@@ -130,23 +140,13 @@ namespace CustomProgramCode
             }
         }
 
+        // Render the visual effect of an attack
         public void RenderAttackEffect()
         {
-            // if (_isAttacking)
-            //{
             SplashKit.DrawCircle(Color.Orange, X + (_sprite.Width / 2), Y + (_sprite.Height / 2), AttackRange);
-            //}
         }
 
-        private void TryDropItem()
-        {
-            double dropChance = 0.3; // 30% chance to drop an item
-            if (SplashKit.Rnd() <= dropChance)
-            {
-                // _room.AddItem(new Item(X, Y));
-            }
-        }
-
+        // Check for collisions with another sprite and determine direction of collision
         public string HasCollidedWith(Sprite objects)
         {
             bool up = false;

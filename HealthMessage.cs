@@ -24,7 +24,7 @@ namespace CustomProgramCode
         {
             if (_duration > 0)
             {
-                _duration--;
+                _duration--; // Decrease duration
                 _y -= 0.05; // Move the message upwards
             }
         }
@@ -33,13 +33,13 @@ namespace CustomProgramCode
         {
             if (_duration > 0)
             {
-                SplashKit.DrawText(_text, _color, _x, _y);
+                SplashKit.DrawText(_text, _color, _x, _y); // Draw the text message
             }
         }
 
         public bool IsExpired()
         {
-            return _duration <= 0;
+            return _duration <= 0; // Check if the message duration has expired
         }
     }
 }
