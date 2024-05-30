@@ -1,0 +1,58 @@
+SplashKit Animation
+
+// Frames for animations
+// Format: f: frameID, cell, duration, nextFrame
+
+// Idle Facing Right animation (first row, frames 0-5)
+f: [0-5], [0-5], 80, 0
+
+// Idle Facing Left animation (ninth row, frames 48-53)
+f: [48-53], [48-53], 80, 48
+
+// Walking(Right) animation (second row, frames 6-11)
+f: [6-11], [6-11], 80, 6
+
+// Walking(Left) animation (Tenth row, frames 54-59)
+f: [54-59], [54-59], 80, 54
+
+
+
+// Attack(Up) animation (Seventh row, frames 36-41)
+f: [36-41], [36-41], 40, 36
+
+// Attack(Up)2 animation (Eleven row, frames 42-47)
+f: [42-47], [42-47], 40, 42
+
+// Attack(Down) animation (Fifth row, frames 24-29)
+f: [24-29], [24-29], 40, 24
+
+// Attack(Down)2 animation (Sixth row, frames 30-35)
+f: [30-35], [30-35], 40, 30
+
+
+
+// Attack(Right) animation (Third row, frames 12-17)
+f: [12-17], [12-17], 40, 12
+
+// Attack(Right)2 animation (Third row, frames 18-23)
+f: [18-23], [18-23], 40, 18
+
+// Attack(Left) animation (Eleven row, frames 60-65)
+f: [65-60], [65-60], 40, 65
+
+// Attack(Left)2 animation (Eleven row, frames 71-66)
+f: [71-66], [71-66], 40, 71
+
+// Identifiers for animations
+i:idleright, 0
+i:idleleft, 48
+i:walkright, 6
+i:walkleft, 54
+i:attackup, 36
+i:attackup2, 42
+i:attackdown, 24
+i:attackdown2, 30
+i:attackright, 12
+i:attackright2, 18
+i:attackleft, 65
+i:attackleft2, 71

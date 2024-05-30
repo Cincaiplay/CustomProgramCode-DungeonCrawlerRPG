@@ -1,0 +1,38 @@
+SplashKit Animation
+
+// Frames for animations
+// Format: f: frameID, cell, duration, nextFrame
+
+// Idle Facing Right animation (first row, frames 0-6)
+f: [0-6], [0-6], 80, 0
+
+// Idle Facing Left animation (eighth row, frames 41-35)
+f: [41-35], [41-35], 80, 41
+
+// Walking(Right) animation (second row, frames 7-12)
+f: [7-12], [7-12], 80, 7
+
+// Walking(Left) animation (seventh row, frames 48-43)
+f: [48-43], [48-43], 80, 48
+
+// Attack(Right) animation (third row, frames 14-19)
+f: [14-19], [14-19], 40, 14
+
+// Attack(Left) animation (eighth row, frames 55-50)
+f: [55-50], [55-50], 40, 55
+
+// Attack(Up) animation (fifth row, frames 28-33)
+f: [28-33], [28-33], 40, 28
+
+// Attack(Down) animation (fourth row, frames 21-26)
+f: [21-26], [21-26], 40, 21
+
+// Identifiers for animations
+i:idleright, 0
+i:idleleft, 41
+i:walkright, 7
+i:walkleft, 48
+i:attackright, 14
+i:attackleft, 55
+i:attackup, 28
+i:attackdown, 21
