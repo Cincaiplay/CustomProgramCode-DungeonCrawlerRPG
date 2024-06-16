@@ -32,7 +32,7 @@ namespace CustomProgramCode
         {
             // Load the player bitmap and set cell details
             Bitmap playerBitmap = SplashKit.LoadBitmap("player", "player.png");
-            playerBitmap.SetCellDetails(playerBitmap.Width / 6, playerBitmap.Height / 12, 6, 12, 72); // Correct cell width and height based on the image
+            playerBitmap.SetCellDetails(playerBitmap.Width / 6, playerBitmap.Height / 12, 6, 12, 72); // Cell width and height based on the image
 
             // Load the animation script
             AnimationScript playerAnimations = SplashKit.LoadAnimationScript("Animations", "animations.txt");

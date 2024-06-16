@@ -42,4 +42,5 @@ namespace CustomProgramCode
             return _duration <= 0; // Check if the message duration has expired
         }
     }
+
 }

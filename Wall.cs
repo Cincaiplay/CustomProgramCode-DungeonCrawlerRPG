@@ -26,9 +26,5 @@ namespace CustomProgramCode
             SplashKit.DrawSprite(_sprite); // Draw the sprite
         }
 
-        public bool CollidesWith(Player player)
-        {
-            return SplashKit.SpriteCollision(_sprite, player.Sprite); // Check for collision with player
-        }
     }
 }
